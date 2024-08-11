@@ -20,5 +20,5 @@
 Результирующий запрос собран в [единый файл](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/Script4superstore.sql)
 
 **Полученные  в результате выполнения навыки:**
-
+[Как создавать таблицы и делать элементарные запросы](https://github.com/Bupley/datalearn/blob/main/de-101/hints_SQL.md)
 *здесь надо ссылку на какой-то файл с инструкциями и краткими шпаргалками*
