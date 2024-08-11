@@ -1,7 +1,7 @@
 # Домашнее задание к модулю 2
 ## Раздел 2.3
-Используя исходный файл [Sample Suprestore] (https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/Sample%20-%20Superstore.xls),
-создано 3 запроса на создание таблиц [orders_new] (https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/Script4request_orders.sql), peole_new, returns_new. Но, так как я чайник, то ссылка будет тоько на последний запрос, остальные не сохранил.
+Используя исходный файл [Sample Suprestore](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/Sample%20-%20Superstore.xls),
+создано 3 запроса на создание таблиц [orders_new](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/Script4request_orders.sql), peole_new, returns_new. Но, так как я чайник, то ссылка будет тоько на последний запрос, остальные не сохранил.
 Далее, с помощью язука SQL создан ряд запросов согласно перечня из задания для модуля 1:
 
 * Total Sales
