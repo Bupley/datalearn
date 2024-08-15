@@ -10,8 +10,8 @@
 DROP TABLE IF EXISTS Example_1
 create TABLE Example_1(
     Col_1 varchar (5) not null primary key --этот столбец будет содержать текст длиной не более 5 символов
-    Col_2 integer not null -- тут будет целочисленное значение
-    Col_3 date not null -- тут будет дата (ГГГГ.ММ.ДД)
+    ,Col_2 integer not null -- тут будет целочисленное значение
+    ,Col_3 date not null -- тут будет дата (ГГГГ.ММ.ДД)
 );
 INSERT INTO Example_1(Col_1, Col_2, Col_3) values ('data1', 5, '11.08.2024') -- добавление одной строчки в таблицу
 ```
