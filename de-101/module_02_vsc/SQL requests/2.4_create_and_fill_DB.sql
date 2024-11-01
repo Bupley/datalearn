@@ -124,6 +124,37 @@ FROM
 ---------------------------------чек--------------------------------
 SELECT * FROM public.product
 
+----------------------создание таблицы CALENDAR----------------------
+DROP TABLE calendar CASCADE
+CREATE TABLE calendar
+(
+ "date"  date NOT NULL,
+ day     int NOT NULL,
+ dow     text NOT NULL,
+ week    int NOT NULL,
+ month   int NOT NULL,
+ quarter int NOT NULL,
+ year    int NOT NULL,
+ CONSTRAINT PK_6 PRIMARY KEY ( date )
+);
+
+----------------------наполнение таблицы CALENDAR----------------------
+INSERT INTO 
+	public.calendar
+SELECT
+	"date"::date,
+	EXTRACT('day' FROM date):: int AS day,
+	to_char(date, 'dy') AS week_day,
+	EXTRACT('week' FROM date):: int AS week,
+	EXTRACT('month' FROM date):: int AS month,
+	EXTRACT('quarter' FROM date):: int AS quarter,
+	EXTRACT('year' FROM date):: int AS year
+FROM
+	generate_series(date('2000-01-01'), date('2030-01-01'), INTERVAL '1 day') AS t(date) -- генетрирует последовательнсоть значений с 2000 по 2030 год с шагом 1 день, псеводним таблицы - t, созданного столбца - date
+
+	---------------------------------чек--------------------------------
+SELECT * FROM public.calendar
+
 ----------------------создание таблицы SALE----------------------
 DROP TABLE sale CASCADE
 CREATE TABLE sale
@@ -186,4 +217,3 @@ JOIN
 	
 ---------------------------------чек--------------------------------
 SELECT * FROM public.sale
-	
