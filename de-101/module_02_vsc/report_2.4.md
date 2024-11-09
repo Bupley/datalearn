@@ -165,11 +165,10 @@ tot_sales|region
 501239.8908|	Central
 
 ## Раздел 2.4
-В [sqlDBM](https://sqldbm.com/Home/) построена физическая модель данных  
+В [sqlDBM](https://sqldbm.com/Home/) построена физическая модель данных:
+
 ![here we go](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/PICS/superstore_ERD.PNG)  
 Логическую пришлось скипнуть, потому что в бесплатной версии она не отображается. Да и так понятно вроде все.  
-DDL-запрос для создания таблиц и DML-запрос дл наполнения таблиц и исполнен в DBeaver. [Вот он, полюбуйтесь](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/2.4_create_and_fill_DB.sql).  
-Несколько моментов:
-* В таблицах `customer`, `order` воспользовался существующими ID, так как они уникальны;
-* пустующие строки в столбце `postal_code` заполнил в исходной таблице orders значением, взятым из примера в уроке.
+DDL-запрос для создания и DML-запрос для наполнения таблиц исполнен в DBeaver. [Вот он, полюбуйтесь](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/2.4_create_and_fill_DB.sql).  
+
 
