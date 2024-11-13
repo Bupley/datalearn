@@ -1,10 +1,10 @@
 # Домашнее задание к модулю 2
 ## Раздел 2.3
-Используя исходный файл [Sample Suprestore](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/Sample%20-%20Superstore.xls),
+Используя исходный файл [Sample Suprestore](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.4/Sample%20-%20Superstore.xls),
 создано 3 таблицы в DBeaver, исполняя поочередно 3 запроса:
-- [orders](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/orders_sql.sql) 
-- [people](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/people_sql.sql)
-- [returns](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/returns_sql.sql)  
+- [orders](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/orders_sql.sql) 
+- [people](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/people_sql.sql)
+- [returns](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/returns_sql.sql)  
 
 Сформированы команды на PostgreSQL для отображения следующих метрик:
 
@@ -45,7 +45,7 @@ from
 group by 
 	order_id
 ```
-Ответ: [Profit per Order](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/CSV%20results/profit_per_order_csv.csv)
+Ответ: [Profit per Order](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/CSV%20results/profit_per_order_csv.csv)
 
 * Sales per Customer - продажи на одного клиента
 ```
@@ -59,7 +59,7 @@ group by
 order by 
     "sum" asc
 ```
-Ответ: [Sales per Customer](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/CSV%20results/Sales_per_customer_csv.csv)
+Ответ: [Sales per Customer](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/CSV%20results/Sales_per_customer_csv.csv)
 
 * Avg. Discount - средняя скидка
 ```
@@ -84,7 +84,7 @@ group by
 order by 
 	month_num
 ```
-Ответ: [Monthly_sales_by_segment](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/CSV%20results/Monthly_sales_by_segment_csv.csv)
+Ответ: [Monthly_sales_by_segment](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/CSV%20results/Monthly_sales_by_segment_csv.csv)
 
 * Monthly Sales by Product Category - средний доход по категориям и по месяцам
 ```
@@ -100,7 +100,7 @@ group by
 order by 
 	month_num
 ```
-Ответ: [Monthly_sales_by_product_category](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/CSV%20results/Monthly_sales_by_product_category_csv.csv)
+Ответ: [Monthly_sales_by_product_category](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/CSV%20results/Monthly_sales_by_product_category_csv.csv)
 
 * Sales by Product Category over time - средний доход по категориям за все время
 ```
@@ -131,7 +131,7 @@ group by
 	customer_name
 ```
 Ответ: 
-[Sales_and_profit_by_customer](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/CSV%20results/Sales_and_profit_by_customer_csv.csv)
+[Sales_and_profit_by_customer]https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/CSV%20results/Sales_and_profit_by_customer_csv.csv)
 
 * Customer Ranking - ранжирование клиентов по выручке
 ```
@@ -145,7 +145,7 @@ group by
 order by 
 	tot_profit desc
 ```
-Ответ: [Customer_ranking](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/CSV%20results/Customer_ranking_csv.csv)
+Ответ: [Customer_ranking](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.3/CSV%20results/Customer_ranking_csv.csv)
 
 * Sales per region - продажи по регионам за все время
 ```
@@ -167,9 +167,9 @@ tot_sales|region
 ## Раздел 2.4
 В pgAdmin построена физическая модель данных:
 
-![here we go](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/PICS/superstore_ERD_pgAdmin.PNG)  
+![here we go](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.4/superstore_ERD_pgAdmin.PNG)  
 
-Для более подробного ознакомления по [ссылке] разместил файл, который открывается в pgAdmin: `Tools->ERD Tool`.
-Формирован и исполнен в DBeaver [DDL-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/2.4_create_from_PGadmin.sql) для создания таблиц и [DML-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/2.4_fill_from_PGadmin.sql) для наполнения таблиц. 
+Для более подробного ознакомления по [ссылке](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.4/superstore.pgerd) разместил файл, который открывается в pgAdmin: `Tools->ERD Tool`.
+Формирован и исполнен в DBeaver [DDL-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.4/2.4_create_from_PGadmin.sql) для создания таблиц и [DML-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/files%20for%202.4/2.4_fill_from_PGadmin.sql) для наполнения таблиц. 
 
 
