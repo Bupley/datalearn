@@ -165,10 +165,11 @@ tot_sales|region
 501239.8908|	Central
 
 ## Раздел 2.4
-В [sqlDBM](https://sqldbm.com/Home/) построена физическая модель данных:
+В pgAdmin построена физическая модель данных:
 
-![here we go](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/PICS/superstore_ERD.PNG)  
-Логическую пришлось скипнуть, потому что в бесплатной версии она не отображается. Да и так понятно вроде все.  
-DDL-запрос для создания и DML-запрос для наполнения таблиц исполнен в DBeaver. [Вот он, полюбуйтесь](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/2.4_create_and_fill_DB.sql).  
+![here we go](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/PICS/superstore_ERD_pgAdmin.PNG)  
+
+Для более подробного ознакомления по [ссылке] разместил файл, который открывается в pgAdmin: `Tools->ERD Tool`.
+Формирован и исполнен в DBeaver [DDL-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/2.4_create_from_PGadmin.sql) для создания таблиц и [DML-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module_02_vsc/SQL%20requests/2.4_fill_from_PGadmin.sql) для наполнения таблиц. 
 
 
