@@ -165,11 +165,15 @@ tot_sales|region
 501239.8908|	Central
 
 ## Раздел 2.4
-В pgAdmin построена физическая модель данных:
+В sqlDBM потроена физическая модель данных типа "звезда":
 
-![here we go](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/superstore_ERD_pgAdmin.PNG)  
+![here we go](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/superstore_ERD_star.PNG)
+
+Сформирован и исполнен в DBeaver [запрос для создания и наполнения таблиц](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/2.4_create_and_fill_sqlDBM.sql)
+
+В pgAdmin построена физическая модель данных типа "снежинка":
+
+![here we go again](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/superstore_ERD_pgAdmin.PNG)  
 
 Для более подробного ознакомления по [ссылке](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/superstore.pgerd) разместил файл, который открывается в pgAdmin: `Tools->ERD Tool`.
 Формирован и исполнен в DBeaver [DDL-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/2.4_create_from_PGadmin.sql) для создания таблиц и [DML-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/2.4_fill_from_PGadmin.sql) для наполнения таблиц. 
-
-
