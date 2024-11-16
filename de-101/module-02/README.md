@@ -165,7 +165,7 @@ tot_sales|region
 501239.8908|	Central
 
 ## Раздел 2.4
-В sqlDBM потроена физическая модель данных типа "звезда":
+В sqlDBM потроена физическая модель данных типа "звезда"  :
 
 ![here we go](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/superstore_ERD_star.PNG)
 
@@ -177,3 +177,9 @@ tot_sales|region
 
 Для более подробного ознакомления по [ссылке](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/superstore.pgerd) разместил файл, который открывается в pgAdmin: `Tools->ERD Tool`.
 Формирован и исполнен в DBeaver [DDL-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/2.4_create_from_PGadmin.sql) для создания таблиц и [DML-запрос](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.4/2.4_fill_from_PGadmin.sql) для наполнения таблиц. 
+
+## Раздел 2.5
+Воспользовался облачными сервисами Яндекс, через [консоль](https://console.yandex.cloud) по следующим инструкциям:
+1. Создал кластер для PostgreSQL ([инструкция](https://yandex.cloud/ru/docs/managed-postgresql/operations/cluster-create))
+2. Сделал хост публичным ([инструкция](https://yandex.cloud/ru/docs/managed-postgresql/operations/hosts))
+3. Настроил группу безопасности, SSl-сертификат (просто скачал в локальную папку), нашел доменное имя хоста и подключился через DBeaver ([инструкция](https://yandex.cloud/ru/docs/managed-postgresql/operations/connect#dbeaver_1))
