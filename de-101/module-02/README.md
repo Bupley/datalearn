@@ -182,4 +182,12 @@ tot_sales|region
 Воспользовался облачными сервисами Яндекс, через [консоль](https://console.yandex.cloud) по следующим инструкциям:
 1. Создал кластер для PostgreSQL ([инструкция](https://yandex.cloud/ru/docs/managed-postgresql/operations/cluster-create))
 2. Сделал хост публичным ([инструкция](https://yandex.cloud/ru/docs/managed-postgresql/operations/hosts))
-3. Настроил группу безопасности, SSl-сертификат (просто скачал в локальную папку), нашел доменное имя хоста и подключился через DBeaver ([инструкция](https://yandex.cloud/ru/docs/managed-postgresql/operations/connect#dbeaver_1))
+3. Настроил группу безопасности, SSl-сертификат (просто скачал в локальную папку), нашел доменное имя хоста и подключился через DBeaver ([инструкция](https://yandex.cloud/ru/docs/managed-postgresql/operations/connect#dbeaver_1)).  
+
+В результате, ввел все как в инструкции
+
+![screen1](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.5/parameters.PNG)
+
+И успешно прошел тест подключения - все заработало
+
+![screen2](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.5/test_results.PNG)
