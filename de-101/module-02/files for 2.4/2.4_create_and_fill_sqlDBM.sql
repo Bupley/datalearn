@@ -1,132 +1,81 @@
+create schema superstore_dw;
 ----------------------создание таблицы CUSTOMER----------------------
-CREATE TABLE customer
+CREATE TABLE superstore_dw.customer_dim
 (
- customer_id   varchar(8) NOT NULL,
- customer_name varchar(22) NOT NULL,
- segment       varchar(11) NOT NULL,
- CONSTRAINT PK_5 PRIMARY KEY ( customer_id )
+cust_id serial NOT NULL,
+customer_id   varchar(8) NOT NULL,
+customer_name varchar(22) NOT NULL,
+segment       varchar(11) NOT NULL,
+ CONSTRAINT PK_customer PRIMARY KEY ( cust_id )
 );
 
 ----------------------наполнение таблицы CUSTOMER----------------------
-INSERT INTO customer
+INSERT INTO superstore_dw.customer_dim
 SELECT
-	DISTINCT(customer_id), 
-	customer_name,
-	segment
-FROM
-	public.orders
-	
----------------------------------чек--------------------------------
-SELECT * FROM public.customer
+	100+ROW_NUMBER () OVER() AS cust_id,
+	*
+FROM (SELECT DISTINCT(customer_id), customer_name, segment FROM	public.orders) AS a;
+
+SELECT * FROM superstore_dw.customer_dim
 
 ----------------------создание таблицы MANAGER----------------------
-CREATE TABLE manager
+CREATE TABLE superstore_dw.manager_dim
 (
- region_id int NOT NULL,
+ region_id serial NOT NULL,
  region    varchar(7) NOT NULL,
  person    varchar(17) NOT NULL,
- CONSTRAINT PK_7 PRIMARY KEY ( region_id )
+ CONSTRAINT PK_manager PRIMARY KEY ( region_id )
 );
 
 ----------------------наполнение таблицы MANAGER----------------------
-INSERT INTO 
-	manager
-SELECT
-	100+ROW_NUMBER() OVER() AS region_id,
-	region,
-	person 
-FROM 
-	public.people
-	
----------------------------------чек--------------------------------
-SELECT * FROM public.manager
-	
-----------------------создание таблицы ORDER----------------------
-DROP TABLE "order" CASCADE
-CREATE TABLE "order"
+INSERT INTO superstore_dw.manager_dim
+SELECT 	100+ROW_NUMBER() OVER() AS region_id, 	region,	person FROM public.people;
+
+----------------------создание таблицы GEOGRAPHY----------------------
+CREATE TABLE superstore_dw.geo_dim
 (
- order_id    varchar(14) NOT NULL,
- order_date  date NOT NULL,
- ship_date   date NOT NULL,
- ship_mode   varchar(14) NOT NULL,
- returned    boolean NOT NULL,
- country     varchar(13) NOT NULL,
- city        varchar(17) NOT NULL,
- "state"     varchar(20) NOT NULL,
- postal_code int NOT NULL,
- CONSTRAINT PK_3 PRIMARY KEY ( order_id )
+ geo_id serial NOT NULL,
+ country   varchar(13) NOT NULL,
+ state   varchar(20) NOT NULL,
+ city   varchar(17) NOT NULL,
+ postal_code    varchar(20) NOT NULL,
+ CONSTRAINT PK_geo PRIMARY KEY (geo_id)
 );
 
-------------добавление почтового кода для города Burlington, Vermont state---------
-UPDATE
-	public.orders
-SET 
-	postal_code = 05401 --код взял в исходном sql
-WHERE
-	postal_code IS  NULL
-AND
-	city='Burlington';
+----------------------наполнение таблицы GEOGRAPHY----------------------
+INSERT INTO superstore_dw.geo_dim
+SELECT 	100+ROW_NUMBER() OVER() AS geo_id, * FROM
+(SELECT DISTINCT country, state, city, postal_code FROM public.orders) AS a;
 
-----------------------наполнение таблицы ORDER----------------------
-INSERT INTO 
-	public."order"
-SELECT
-	DISTINCT(o.order_id),
-	o.order_date,
-	o.ship_date,
-	o.ship_mode,
-	CASE
-		WHEN r.returned LIKE 'Yes' THEN CAST(true AS boolean) -- создал в таблице тип boolean, поэтому пришлось конвертировать из varchar
-		ELSE CAST(false AS boolean)
-	END AS returned,
-	o.country,
-	o.city,
-	o.state,
-	o.postal_code --вот тут ругнулся, что значения нулевые, поэтому пришлось подставлять значения
-FROM 
-	public.orders o
-LEFT JOIN
-	public."returns" r
-ON
-	r.order_id=o.order_id;
+UPDATE public.orders
+SET postal_code ='05401' WHERE city='Burlington' AND postal_code IS NULL
 
----------------------------------чек--------------------------------
-SELECT	* FROM	public."order"
-	
+ALTER TABLE public.orders 
+ALTER COLUMN postal_code TYPE varchar(20);
+
+SELECT * FROM superstore_dw.geo_dim
+
 ----------------------создание таблицы PRODUCT----------------------
-DROP TABLE public.product CASCADE
-CREATE TABLE product
+CREATE TABLE superstore_dw.product_dim
 (
-prod_id int NOT NULL,
+prod_id serial NOT NULL,
  product_id   varchar(15) NOT NULL,
  product_name varchar(127) NOT NULL,
  category     varchar(15) NOT NULL,
  sub_category varchar(11) NOT NULL,
- CONSTRAINT PK_2 PRIMARY KEY ( prod_id )
+ CONSTRAINT PK_product PRIMARY KEY ( prod_id )
 );
 
 ----------------------наполнение таблицы PRODUCT----------------------
-INSERT INTO
-	public.product
-SELECT 
-	100+ROW_NUMBER () OVER () AS prod_id, --пришлось добавить, потому что product_id не уникален
-	*
-FROM
-	(SELECT
-		DISTINCT (product_id),
-		product_name,
-		category,
-		subcategory
+INSERT INTO	superstore_dw.product_dim
+SELECT	100+ROW_NUMBER () OVER () AS prod_id, * FROM 
+(SELECT	DISTINCT (product_id),	product_name,	category,	subcategory	FROM public.orders) AS a;
 
-	FROM 
-		public.orders);
-	
----------------------------------чек--------------------------------
-SELECT * FROM public.product
+SELECT * FROM superstore_dw.product_dim
 
 ----------------------создание таблицы CALENDAR----------------------
-DROP TABLE calendar CASCADE
-CREATE TABLE calendar
+
+CREATE TABLE superstore_dw.calendar_dim
 (
  "date"  date NOT NULL,
  day     int NOT NULL,
@@ -135,85 +84,100 @@ CREATE TABLE calendar
  month   int NOT NULL,
  quarter int NOT NULL,
  year    int NOT NULL,
- CONSTRAINT PK_6 PRIMARY KEY ( date )
+ CONSTRAINT PK_calendar PRIMARY KEY ( "date")
 );
 
 ----------------------наполнение таблицы CALENDAR----------------------
 INSERT INTO 
-	public.calendar
+	superstore_dw.calendar_dim
 SELECT
 	"date"::date,
-	EXTRACT('day' FROM date):: int AS day,
+	EXTRACT('day' FROM date):: int AS "day",
 	to_char(date, 'dy') AS week_day,
 	EXTRACT('week' FROM date):: int AS week,
-	EXTRACT('month' FROM date):: int AS month,
+	EXTRACT('month' FROM date):: int AS "month",
 	EXTRACT('quarter' FROM date):: int AS quarter,
-	EXTRACT('year' FROM date):: int AS year
+	EXTRACT('year' FROM date):: int AS "year"
 FROM
 	generate_series(date('2000-01-01'), date('2030-01-01'), INTERVAL '1 day') AS t(date) -- генетрирует последовательнсоть значений с 2000 по 2030 год с шагом 1 день, псеводним таблицы - t, созданного столбца - date
 
-	---------------------------------чек--------------------------------
-SELECT * FROM public.calendar
+SELECT * FROM superstore_dw.calendar_dim
+
+----------------------создание таблицы ORDER----------------------
+
+CREATE TABLE superstore_dw.order_dim
+(
+ ord_id serial NOT NULL,
+ order_id    varchar(14) NOT NULL,
+ order_date  date NOT NULL,
+ ship_date   date NOT NULL,
+ ship_mode   varchar(14) NOT NULL,
+ CONSTRAINT PK_order PRIMARY KEY ( ord_id )
+);
+
+----------------------наполнение таблицы ORDER----------------------
+INSERT INTO superstore_dw.order_dim
+SELECT 100+ROW_NUMBER() OVER() AS ord_id, * FROM
+(SELECT DISTINCT order_id, order_date, ship_date, ship_mode FROM public.orders) AS a;
+	
+SELECT * FROM superstore_dw.order_dim
 
 ----------------------создание таблицы SALE----------------------
-DROP TABLE sale CASCADE
-CREATE TABLE sale
+DROP TABLE superstore_dw.sale_fact
+CREATE TABLE superstore_dw.sale_fact
 (
- row_id     int NOT NULL,
+ row_id int NOT NULL,
+ ord_id int NOT NULL,
+ geo_id int NOT NULL,
+ region_id int NOT NULL, 
+ cust_id int NOT NULL,
+ prod_id int NOT NULL,
  sales       numeric(8,3) NOT NULL,
  quantity    int NOT NULL,
  discount    numeric(3,2) NOT NULL,
  profit      numeric(9,4) NOT NULL,
- prod_id  int NOT NULL,
- order_id    varchar(14) NOT NULL,
- customer_id varchar(8) NOT NULL,
- region_id   int NOT NULL,
- CONSTRAINT PK_1 PRIMARY KEY ( row_id),
- CONSTRAINT FK_1 FOREIGN KEY ( order_id ) REFERENCES "order" ( order_id ),
- CONSTRAINT FK_3 FOREIGN KEY ( customer_id ) REFERENCES customer ( customer_id ),
- CONSTRAINT FK_4 FOREIGN KEY ( region_id ) REFERENCES manager ( region_id ),
- CONSTRAINT FK_5 FOREIGN KEY ( prod_id ) REFERENCES product ( prod_id )
+ returned varchar(3),
+ 
+ CONSTRAINT PK_row PRIMARY KEY ( row_id),
+ CONSTRAINT FK_order FOREIGN KEY ( ord_id ) REFERENCES superstore_dw.order_dim (ord_id),
+ CONSTRAINT FK_cust FOREIGN KEY ( cust_id ) REFERENCES superstore_dw.customer_dim ( cust_id ),
+ CONSTRAINT FK_manager FOREIGN KEY ( region_id ) REFERENCES superstore_dw.manager_dim ( region_id ),
+ CONSTRAINT FK_product FOREIGN KEY ( prod_id ) REFERENCES superstore_dw.product_dim ( prod_id ),
+ CONSTRAINT FK_geo FOREIGN KEY ( geo_id ) REFERENCES superstore_dw.geo_dim ( geo_id )
 )
 ;
-CREATE INDEX FK_1 ON sale
-(
- order_id
-);
-
-CREATE INDEX FK_3 ON sale
-(
- customer_id
-);
-
-CREATE INDEX FK_4 ON sale
-(
- region_id
-);
-
-CREATE INDEX FK_5 ON sale
-(
- prod_id
-);
+CREATE INDEX FK_order ON superstore_dw.sale_fact (ord_id);
+CREATE INDEX FK_cust ON superstore_dw.sale_fact (cust_id);
+CREATE INDEX FK_manager ON superstore_dw.sale_fact (region_id);
+CREATE INDEX FK_product ON superstore_dw.sale_fact (prod_id);
+CREATE INDEX FK_geo ON superstore_dw.sale_fact (geo_id);
 
 ----------------------наполнение таблицы SALE----------------------
 INSERT INTO 
-	public.sale
-SELECT
+	superstore_dw.sale_fact
+WITH cleared_return AS (SELECT DISTINCT * FROM public."returns")
+	SELECT
 	o.row_id,
+	ord.ord_id,
+	g.geo_id,
+	m.region_id,
+	c.cust_id,
+	p.prod_id,
 	o.sales,
 	o.quantity,
 	o.discount,
 	o.profit,
-	p.prod_id,
-	o.order_id,
-	o.customer_id,
-	m.region_id
+	CASE
+		WHEN r.returned IS NULL THEN 'No'
+		ELSE r.returned
+	END AS returned
 FROM
 	public.orders o
-JOIN
-	public.product p ON o.product_id=p.product_id AND o.product_name=p.product_name AND o.category=p.category
-JOIN
-	public.manager m USING (region)
-	
----------------------------------чек--------------------------------
-SELECT * FROM public.sale
+JOIN superstore_dw.order_dim AS ord ON o.order_id=ord.order_id AND o.order_date=ord.order_date AND o.ship_date=ord.ship_date AND o.ship_mode=ord.ship_mode
+JOIN superstore_dw.geo_dim AS g ON o.country=g.country AND o.state=g.state AND o.city=g.city AND o.postal_code = g.postal_code 
+JOIN superstore_dw.manager_dim AS m ON o.region=m.region
+JOIN superstore_dw.customer_dim	AS c ON o.customer_id=c.customer_id AND o.customer_name=c.customer_name
+JOIN superstore_dw.product_dim AS p ON o.product_id=p.product_id AND o.product_name =p.product_name
+LEFT JOIN cleared_return AS r ON o.order_id = r.orderid 
+
+
