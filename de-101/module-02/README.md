@@ -191,3 +191,7 @@ tot_sales|region
 И успешно прошел тест подключения - все заработало
 
 ![screen2](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.5/test_results.PNG)
+
+Прогнал SQL запрос зля модели данных типа "звезда", убедился, что все синхронизировалось с облачным хранилищем:
+
+![screen3](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.5/db_tree.PNG)
