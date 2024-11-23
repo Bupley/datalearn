@@ -197,6 +197,13 @@ tot_sales|region
 ![screen3](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.5/db_tree.PNG)
 
 ## Раздел 2.6
-Продолжая плыть в русле яндекс-среды, создал чарт в [Datalens](https://datalens.yandex.cloud/collections). И похоже, как говорится, "Остапа понесло":
+Продолжая плыть в русле яндекс-среды, создал чарт в [Datalens](https://datalens.yandex.cloud/collections). И похоже, как говорится в одной великой книге, "Остапа понесло":
 
+![screen1](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.6/dash-1.PNG)
+
+![screen2](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.6/dash-2.PNG)
+
+![screen3](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.6/dash-3.PNG)
+
+Приведенный на скринах дашборд лежит в публичном доступе по [ссылке](https://datalens.yandex/m36g0szpjnl69). Обилие графиков могу оправдать лишь отсутстием конкретного ТЗ и обилием инструментов у Яндекса :) 
 
