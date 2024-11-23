@@ -195,3 +195,8 @@ tot_sales|region
 Прогнал SQL запрос зля модели данных типа "звезда", убедился, что все синхронизировалось с облачным хранилищем:
 
 ![screen3](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.5/db_tree.PNG)
+
+## Раздел 2.6
+Продолжая плыть в русле яндекс-среды, создал чарт в [Datalens](https://datalens.yandex.cloud/collections). И похоже, как говорится, "Остапа понесло":
+
+
