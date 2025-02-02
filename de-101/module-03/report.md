@@ -16,4 +16,6 @@
  - цветовая маркировка
  - динамичные заголовки диаграмм
 
+проверка
+
 [Итоговый файл в формате .TWBX](https://github.com/Bupley/datalearn/blob/main/de-101/module-03/Superstore_1.twbx)
