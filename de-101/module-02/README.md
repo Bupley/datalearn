@@ -6,7 +6,7 @@
 - [people](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.3/people_sql.sql)
 - [returns](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.3/returns_sql.sql)  
 
-Сформированы команды на PostgreSQL для отображения следующих метрик:
+!Сформированы команды на PostgreSQL для отображения следующих метрик:
 
 * Total Sales - сумма дохода
 ```
@@ -32,7 +32,7 @@ select
 	(sum(profit)/sum(sales)) as profit_ratio
 from 
 	public.orders
-```
+```cd
 Ответ: 0.12467217240315604661
 
 * Profit per Order - выручка за каждый заказ
@@ -205,5 +205,5 @@ tot_sales|region
 
 ![screen3](https://github.com/Bupley/datalearn/blob/main/de-101/module-02/files%20for%202.6/dash-3.PNG)
 
-Приведенный на скринах дашборд лежит в публичном доступе по [ссылке](https://datalens.yandex/m36g0szpjnl69). Обилие графиков могу оправдать лишь отсутстием конкретного ТЗ и обилием инструментов у Яндекса :) 
+Приведенный на скринах дашборд лежит в публичном доступе по [ссылке](https://datalens.yandex/m36g0szpjnl69).SS
 
